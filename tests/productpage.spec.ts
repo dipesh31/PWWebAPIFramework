@@ -9,7 +9,7 @@ test.beforeEach(async ({ loginPage }) => {
 
 let productInfo = CsvHelper.readCsv("src/data/productinfodata.csv");
 for (let row of productInfo) {
-  test(`product images count test for product: ${row.product!}`, async ({
+  test(`@regression product images count test for product: ${row.product!}`, async ({
     homePage,
     searchResultsPage,
     productInfoPage,
@@ -26,7 +26,7 @@ for (let row of productInfo) {
 }
 
 for (let row of productInfo) {
-  test(`product header displayed test for product: ${row.product!}`, async ({
+  test(`@regression product header displayed test for product: ${row.product!}`, async ({
     homePage,
     searchResultsPage,
     productInfoPage,
@@ -38,7 +38,7 @@ for (let row of productInfo) {
 }
 
 for (let row of productInfo) {
-  test(`verify product information for product: ${row.product!}`, async ({
+  test(`@regression verify product information for product: ${row.product!}`, async ({
     homePage,
     searchResultsPage,
     productInfoPage,
@@ -64,3 +64,11 @@ for (let row of productInfo) {
       .toBe(row.taxprice!);
   });
 }
+
+test("@smoke comp logo exists on product page", async ({ basePage }) => {
+  expect(await basePage.isLogoVisible()).toBeTruthy();
+});
+
+test("@smoke footers exist on product page", async ({ basePage }) => {
+  expect(await basePage.getPageFootersCount()).toBe(16);
+});

@@ -8,7 +8,7 @@ test.beforeEach(async ({ loginPage }) => {
 
 const productData = CsvHelper.readCsv("src/data/product.csv");
 for (let row of productData) {
-  test(`search product results count test for ${row.productname}`, async ({
+  test(`@regression search product results count test for ${row.productname}`, async ({
     homePage,
     searchResultsPage,
   }) => {
@@ -20,7 +20,7 @@ for (let row of productData) {
 }
 
 for (let row of productData) {
-  test(`user is able to land on the product page test for ${row.productname}`, async ({
+  test(`@smoke user is able to land on the product page test for ${row.productname}`, async ({
     homePage,
     searchResultsPage,
     page,
@@ -30,3 +30,12 @@ for (let row of productData) {
     expect(await page.title()).toBe(row.productname);
   });
 }
+
+//common tests:
+test("@smoke comp logo exists on product page", async ({ basePage }) => {
+  expect(await basePage.isLogoVisible()).toBeTruthy();
+});
+
+test("@smoke footers exist on product page", async ({ basePage }) => {
+  expect(await basePage.getPageFootersCount()).toBe(16);
+});

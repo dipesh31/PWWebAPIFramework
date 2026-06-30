@@ -5,15 +5,15 @@ test.beforeEach(async ({ loginPage }) => {
   await loginPage.doLogin("dipesh.31mehta@gmail.com", "India1234");
 });
 
-test("home page title test", async ({ homePage }) => {
+test("@smoke home page title test", async ({ homePage }) => {
   expect(await homePage.getHomePageTitle()).toBe("My Account");
 });
 
-test("logout link exist test", async ({ homePage }) => {
+test("@smoke logout link exist test", async ({ homePage }) => {
   expect(await homePage.logoutLinkExist()).toBeTruthy();
 });
 
-test("home page headers exist test", async ({ homePage }) => {
+test("@regression home page headers exist test", async ({ homePage }) => {
   let allHeaders = await homePage.getHomePageHeaders();
   expect.soft(allHeaders).toHaveLength(4);
   expect
