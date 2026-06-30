@@ -108,7 +108,7 @@ jobs:
           echo "========================================="
           npx playwright test --project=chromium --grep @smoke
         env:
-          ENV: Dev
+          ENV: dev
           BASE_URL: ${{ secrets.BASE_URL }}
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
@@ -193,7 +193,7 @@ jobs:
           echo "========================================="
           npx playwright test --project=chromium
         env:
-          ENV: QA
+          ENV: qa
           BASE_URL: ${{ secrets.BASE_URL }}
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
