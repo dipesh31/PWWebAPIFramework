@@ -1,16 +1,29 @@
 name: Playwright Tests
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-  workflow_dispatch: # manual trigger in github UI
+  schedule:
+    - cron: "30 21 * * 1-4" # Mon-Fri 8PM IST
+  # push:
+  #  branches: [main]
+  # pull_request:
+  #  branches: [main]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Select environment"
+        required: true
+        default: "QA"
+        type: choice
+        options:
+          - QA
+          - stage
+          - dev
 
 jobs:
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    environment: ${{ github.event.inputs.environment || 'QA' }}
 
     steps:
       - name: Checkout code
@@ -19,18 +32,31 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
+          cache: "npm"
+
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ hashFiles('package-lock.json') }}
 
       - name: Install dependencies
         run: npm ci
 
       - name: Install Playwright browsers
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
         run: npx playwright install --with-deps chromium
+
+      - name: Install Playwright OS deps only (if cached)
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
 
       - name: Run tests
         run: npx playwright test --project=chromium
         env:
-          ENV: qa
+          ENV: ${{ github.event.inputs.environment || 'QA' }}
           BASE_URL: ${{ secrets.BASE_URL }}
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
@@ -54,4 +80,12 @@ jobs:
         with:
           name: allure-results-${{ github.run_id }}
           path: allure-results/
+          retention-days: 30
+
+      - name: Upload Playwright Traces
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-traces-${{ github.run_id }}
+          path: test-results/
           retention-days: 30
