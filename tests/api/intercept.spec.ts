@@ -12,7 +12,9 @@ test("intercept and log request", async ({ page }) => {
     await route.continue();
   });
 
-  await page.goto("https://www.google.com/");
+  await page.goto(
+    "https://naveenautomationlabs.com/opencart/index.php?route=common/home",
+  );
 });
 
 // intercept with mocking

@@ -9,12 +9,16 @@ const AUTH_HEADER = { Authorization: `Bearer ${TOKEN}` };
 async function createUser(apiHelper: any) {
   let userData = {
     name: "dipesh",
-    email: `dipesh_${Date.now()}@open.com`,
+    email: `dipesh_${Date.now()}_${Math.random()}@open.com`,
     gender: "male",
     status: "active",
   };
 
-  let response = await apiHelper.post("public/v2/users", userData, AUTH_HEADER);
+  let response = await apiHelper.post(
+    "/public/v2/users",
+    userData,
+    AUTH_HEADER,
+  );
   expect(response.status).toBe(201);
 
   return { user: response.body, payload: userData };
@@ -23,7 +27,10 @@ async function createUser(apiHelper: any) {
 //Test 1 - Create and verify - AAA
 test("create user with POST method - AAA", async ({ apiHelper }) => {
   let { user, payload } = await createUser(apiHelper);
-  let response = await apiHelper.get(`public/v2/users/${user.id}`, AUTH_HEADER);
+  let response = await apiHelper.get(
+    `/public/v2/users/${user.id}`,
+    AUTH_HEADER,
+  );
   expect(response.body.name).toBe(payload.name);
   expect(response.body.email).toBe(payload.email);
 });
@@ -39,7 +46,7 @@ test("update user with PUT method - AAA", async ({ apiHelper }) => {
   };
   // update the user
   let response = await apiHelper.put(
-    `public/v2/users/${user.id}`,
+    `/public/v2/users/${user.id}`,
     userUpdateData,
     AUTH_HEADER,
   );
@@ -49,7 +56,7 @@ test("update user with PUT method - AAA", async ({ apiHelper }) => {
   // get the user
 
   let getResponse = await apiHelper.get(
-    `public/v2/users/${user.id}`,
+    `/public/v2/users/${user.id}`,
     AUTH_HEADER,
   );
 
@@ -67,7 +74,7 @@ test("delete user with DELETE method - AAA", async ({ apiHelper }) => {
   };
   // delete the user
   let response = await apiHelper.delete(
-    `public/v2/users/${user.id}`,
+    `/public/v2/users/${user.id}`,
     AUTH_HEADER,
   );
 
@@ -76,7 +83,7 @@ test("delete user with DELETE method - AAA", async ({ apiHelper }) => {
   // get the user
 
   let getResponse = await apiHelper.get(
-    `public/v2/users/${user.id}`,
+    `/public/v2/users/${user.id}`,
     AUTH_HEADER,
   );
 

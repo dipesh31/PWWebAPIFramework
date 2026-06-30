@@ -47,14 +47,14 @@ test("POST - create a single user", async ({ apiHelper }) => {
   };
   //create user
   let postResponse = await apiHelper.post(
-    "public/v2/users",
+    "/public/v2/users",
     userData,
     AUTH_HEADER,
   );
   let userId = postResponse.body.id;
   // get user
   let getResponse = await apiHelper.get(
-    `public/v2/users/${userId}`,
+    `/public/v2/users/${userId}`,
     AUTH_HEADER,
   );
   expect(getResponse.status).toBe(200);
@@ -74,7 +74,7 @@ test("POST - create a single user", async ({ apiHelper }) => {
 
 test("GET - get all users schema", async ({ apiHelper }) => {
   // get user
-  let getResponse = await apiHelper.get("public/v2/users", AUTH_HEADER);
+  let getResponse = await apiHelper.get("/public/v2/users", AUTH_HEADER);
   expect(getResponse.status).toBe(200);
 
   let validate = ajv.compile(userArraySchema);

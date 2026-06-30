@@ -10,7 +10,7 @@ let userId: number;
 
 test.describe.serial("running e2e gorest api test", () => {
   test("GET test - get all the users", async ({ apiHelper }) => {
-    let getResObject = await apiHelper.get("public/v2/users", AUTH_HEADER);
+    let getResObject = await apiHelper.get("/public/v2/users", AUTH_HEADER);
     expect(getResObject.status).toBe(200);
     expect(getResObject.body.length).toBeGreaterThan(0);
   });
@@ -25,7 +25,7 @@ test.describe.serial("running e2e gorest api test", () => {
     };
 
     let postResObject = await apiHelper.post(
-      "public/v2/users",
+      "/public/v2/users",
       userData,
       AUTH_HEADER,
     );
@@ -43,7 +43,7 @@ test.describe.serial("running e2e gorest api test", () => {
     };
 
     let response = await apiHelper.put(
-      `public/v2/users/${userId}`,
+      `/public/v2/users/${userId}`,
       userData,
       AUTH_HEADER,
     );
@@ -55,7 +55,7 @@ test.describe.serial("running e2e gorest api test", () => {
 
   test("Delete test - delete a user", async ({ apiHelper }) => {
     let response = await apiHelper.delete(
-      `public/v2/users/${userId}`,
+      `/public/v2/users/${userId}`,
       AUTH_HEADER,
     );
     expect(response.status).toBe(204);

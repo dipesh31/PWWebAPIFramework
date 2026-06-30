@@ -36,7 +36,7 @@ export default defineConfig({
     screenshot: "only-on-failure",
     video: "retain-on-failure",
     trace: "on-first-retry",
-    headless: !process.env.CI ? false : true,
+    headless: Boolean(process.env.CI),
   },
 
   /* Configure projects for major browsers */
