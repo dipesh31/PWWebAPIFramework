@@ -1,0 +1,4 @@
+fae94a9e14f45bf
+{"firstname":"Dipesh","lastname":"Mehta","totalprice":222,"depositpaid":true,"bookingdates":{"checkin":"2024-01-01","checkout":"2022-01-11"},"additionalneeds":"Breakfast"}
+200
+OK
