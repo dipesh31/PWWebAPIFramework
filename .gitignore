@@ -1,0 +1,52 @@
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
+
+
+
+# env files ()
+config/.env.*
+!config/.env.example
+
+
+# reports
+
+reports/
+allure-results/
+allure-report/
+playwright-report/
+test-results/
+
+
+# build
+
+dist/
+
+
+# auth
+
+src/data/auth.json
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# IDF
+
+.vscode/
+.idea/
+
+# logs
+
+*.log
+npm-debug.log*
+
+# misc
+
+*.tgz

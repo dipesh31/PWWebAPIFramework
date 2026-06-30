@@ -1,0 +1,34 @@
+[
+  {
+    "firstname": "firstname11",
+    "lastname": "lastname11",
+    "email": "fnln01@gmail.com",
+    "telephone": "0101010101",
+    "password": "password01",
+    "subscribe": "Yes"
+  },
+  {
+    "firstname": "firstname12",
+    "lastname": "lastname12",
+    "email": "fnln02@gmail.com",
+    "telephone": "0202020202",
+    "password": "password02",
+    "subscribe": "No"
+  },
+  {
+    "firstname": "firstname13",
+    "lastname": "lastname13",
+    "email": "fnln03@gmail.com",
+    "telephone": "0303030303",
+    "password": "password03",
+    "subscribe": "Yes"
+  },
+  {
+    "firstname": "firstname14",
+    "lastname": "lastname14",
+    "email": "fnln04@gmail.com",
+    "telephone": "0404040404",
+    "password": "password04",
+    "subscribe": "No"
+  }
+]
