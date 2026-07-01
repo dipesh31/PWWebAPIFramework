@@ -7,6 +7,9 @@ const ENV = process.env.ENV || "qa";
 
 dotenv.config({ path: `config/.env.${ENV}` });
 
+console.log("ENV =", ENV);
+console.log("Loaded file =", `config/.env.${ENV}`);
+
 export default defineConfig({
   testDir: "./tests",
   /* Run tests in files in parallel */
