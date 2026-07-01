@@ -1,0 +1,13 @@
+{
+  bookingid: 55,
+  booking: {
+    firstname: 'dipesh',
+    lastname: 'mehta',
+    totalprice: 111,
+    depositpaid: true,
+    bookingdates: { checkin: '2022-01-01', checkout: '2022-01-10' },
+    additionalneeds: 'Breakfast'
+  }
+}
+200
+OK
