@@ -7,7 +7,7 @@ export class LoginPage extends BasePage {
   private readonly password: Locator;
   private readonly loginBtn: Locator;
   private readonly forgottenPasswordLink: Locator;
-  private readonly logo: Locator;
+  //private readonly logo: Locator;
   private readonly validationError: Locator;
   private readonly registerLink: Locator;
 
@@ -24,7 +24,7 @@ export class LoginPage extends BasePage {
       })
       .first();
 
-    this.logo = page.getByAltText("naveenopencart");
+    // this.logo = page.getByAltText("naveenopencart");
     this.validationError = page.locator(
       ".alert.alert-danger.alert-dismissible",
     );

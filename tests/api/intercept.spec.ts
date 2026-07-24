@@ -48,4 +48,6 @@ test("mock seach data api", async ({ page }) => {
   });
 
   console.log("Fake JSON:", fakeJSON);
+
+  await page.pause();
 });

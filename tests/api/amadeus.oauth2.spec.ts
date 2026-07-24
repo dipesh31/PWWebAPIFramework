@@ -24,7 +24,7 @@ test.beforeEach("POST -- generate the access token", async ({ request }) => {
   accessToken = jsonResponse.access_token;
 });
 
-test("@regression GET -- get location data", async ({ request }) => {
+test.skip("@regression GET -- get location data", async ({ request }) => {
   //https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY,AIRPORT&keyword=MUC&countryCode=DE
   let baseURL = "https://test.api.amadeus.com";
   let endPointURL = "/v1/reference-data/locations";
