@@ -21,17 +21,30 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? "50%" : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [
-    ["list"],
-    ["html", { outputFolder: "reports/html-report", open: "never" }],
-    [
-      "allure-playwright",
-      {
-        outputFolder: "allure-results",
-        suiteTitle: true,
-      },
-    ],
-  ],
+  reporter: process.env.CI
+    ? [
+        ["blob"],
+        ["html", { outputFolder: "reports/html-report", open: "never" }],
+        [
+          "allure-playwright",
+          {
+            outputFolder: "allure-results",
+            suiteTitle: true,
+          },
+        ],
+      ]
+    : [
+        ["blob", { outputFolder: "blob-report" }],
+        ["list"],
+        ["html", { outputFolder: "reports/html-report", open: "never" }],
+        [
+          "allure-playwright",
+          {
+            outputFolder: "allure-results",
+            suiteTitle: true,
+          },
+        ],
+      ],
   timeout: 60000,
   expect: {
     timeout: 5000,
