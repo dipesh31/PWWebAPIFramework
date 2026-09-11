@@ -1,0 +1,70 @@
+version: "3.8"
+
+services:
+  shard1:
+    build: .
+    env_file:
+      - config/.env.qa
+    environment:
+      - CI=true
+    volumes:
+      - ./reports-shard1:/app/reports/html-report
+      - ./allure-shard1:/app/allure-results
+      - ./blob-shard1:/app/blob-report
+    command: npx playwright test --project=chromium --shard=1/4
+
+  shard2:
+    build: .
+    env_file:
+      - config/.env.qa
+    environment:
+      - CI=true
+    volumes:
+      - ./reports-shard2:/app/reports/html-report
+      - ./allure-shard2:/app/allure-results
+      - ./blob-shard2:/app/blob-report
+    command: npx playwright test --project=chromium --shard=2/4
+
+  shard3:
+    build: .
+    env_file:
+      - config/.env.qa
+    environment:
+      - CI=true
+    volumes:
+      - ./reports-shard3:/app/reports/html-report
+      - ./allure-shard3:/app/allure-results
+      - ./blob-shard3:/app/blob-report
+    command: npx playwright test --project=chromium --shard=3/4
+
+  shard4:
+    build: .
+    env_file:
+      - config/.env.qa
+    environment:
+      - CI=true
+    volumes:
+      - ./reports-shard4:/app/reports/html-report
+      - ./allure-shard4:/app/allure-results
+      - ./blob-shard4:/app/blob-report
+    command: npx playwright test --project=chromium --shard=4/4
+
+
+
+# Merge PW HTML
+mkdir -p all-blob-reports
+cp blob-shard1/* all-blob-reports/
+cp blob-shard2/* all-blob-reports/
+cp blob-shard3/* all-blob-reports/
+cp blob-shard4/* all-blob-reports/
+npx playwright merge-reports --reporter=html ./all-blob-reports
+npx playwright show-report playwright-report
+
+# Merge Allure
+mkdir -p all-allure-reports
+cp allure-shard1/* all-allure-results/
+cp allure-shard2/* all-allure-results/
+cp allure-shard3/* all-allure-results/
+cp allure-shard4/* all-allure-results/
+npx allure generate all-allure-results --clean -o merged-allure-report
+npx allure open merged-allure-report

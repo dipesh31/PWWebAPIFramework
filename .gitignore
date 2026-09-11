@@ -22,9 +22,9 @@ allure-results/
 allure-report/
 playwright-report/
 test-results/
-allure-shard-*
-blob-shard-*
-reports-shard-*
+allure-shard*
+blob-shard*
+reports-shard*
 
 
 # build
